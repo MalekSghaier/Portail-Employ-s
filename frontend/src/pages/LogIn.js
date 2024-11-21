@@ -12,10 +12,10 @@ import { userSignInAction } from '../redux/actions/userAction'
 import { useNavigate } from 'react-router-dom'
 
 const validationSchema = yup.object({
-    email: yup
-        .string('Entrer Votre email')
-        .email('Entrer Votre email')
-        .required('Email requis'),
+    cin: yup
+        .string('Entrer Votre CIN')
+        .matches(/^\d{8}$/, 'CIN doit contenir exactement 8 chiffres')
+        .required('CIN requis'),
     password: yup
         .string('Entrer votre mot de passe')
         .min(8, 'Mot de passe devrais être au moins de 8 caractères')
@@ -36,7 +36,7 @@ const LogIn = () => {
 
     const formik = useFormik({
         initialValues: {
-            email: '',
+            cin: '',
             password: ''
         },
         validationSchema: validationSchema,
@@ -61,18 +61,18 @@ const LogIn = () => {
                         </Avatar>
                         <TextField sx={{ mb: 3 }}
                             fullWidth
-                            id="email"
-                            label="E-mail"
-                            name='email'
+                            id="cin"
+                            label="CIN"
+                            name='cin'
                             InputLabelProps={{
                                 shrink: true,
                             }}
-                            placeholder="E-mail"
-                            value={formik.values.email}
+                            placeholder="CIN"
+                            value={formik.values.cin}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
-                            error={formik.touched.email && Boolean(formik.errors.email)}
-                            helperText={formik.touched.email && formik.errors.email}
+                            error={formik.touched.cin && Boolean(formik.errors.cin)}
+                            helperText={formik.touched.cin && formik.errors.cin}
                         />
                         <TextField sx={{ mb: 3 }}
                             fullWidth
